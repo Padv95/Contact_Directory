@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+	<title>Contact Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Contact Directory</h3>
+	<hr>
+	
+	<!-- add button-->
+	<a th:href="@{/contacts/showFormAdd}" class="btn btn-primary btn-sm mb-3 " style="margin-right: 10px;">
+		Add Contact
+	</a>
+	
+	<a th:href="@{/contacts/showFormForSearch}" class="btn btn-outline-primary btn-sm mb-3" style="margin-right: 10px;">
+		Search by Id
+	</a>
+	
+	<a th:href="@{/contacts/showFormForSearch2}" class="btn btn-outline-primary btn-sm mb-3" style="margin-right: 10px;">
+		Search by Name
+	</a>
+
+	<table class="table table-bordered table-striped">
+		<thead class="table-dark">
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Update</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempContact : ${contacts}">
+			
+				<td th:text="${tempContact.firstName}" />	
+				<td th:text="${tempContact.lastName}" />
+				<td th:text="${tempContact.phone}" />
+				<td th:text="${tempContact.email}" />	
+				<td>
+					<a th:href="@{/contacts/showFormForUpdate(contactId=${tempContact.id})}" class="btn btn-info btn-sm">
+						Update
+					</a>
+				</td>
+				<td>	
+					<a th:href="@{/contacts/delete(contactId=${tempContact.id})}" class="btn btn-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false">
+						Delete
+					</a>
+				</td>
+				
+			</tr>
+		</tbody>		
+	</table>
+	
+</div>
+	
+</body>
+</html>
+
+
+
